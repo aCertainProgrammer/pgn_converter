@@ -1,7 +1,8 @@
 const input = document.querySelector("#input");
 
 input.addEventListener("input", async () => {
-	const text = await readFile(event.target.files[0]);
+	const file = event.target.files[0];
+	const text = await readFile(file);
 
 	const lines = makeTextIntoLines(text);
 
@@ -13,7 +14,8 @@ input.addEventListener("input", async () => {
 	const fileUrl = URL.createObjectURL(blob);
 	const downloadElement = document.createElement("a");
 	downloadElement.href = fileUrl;
-	downloadElement.download = "output.pgn";
+	const name = await getName(file);
+	downloadElement.download = name;
 	downloadElement.style.display = "none";
 	document.body.appendChild(downloadElement);
 	downloadElement.click();
@@ -22,6 +24,10 @@ input.addEventListener("input", async () => {
 
 async function readFile(file) {
 	return file.text();
+}
+
+async function getName(file) {
+	return file.name;
 }
 
 function makeTextIntoLines(text) {
