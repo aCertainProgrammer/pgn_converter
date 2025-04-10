@@ -1,10 +1,17 @@
 const number = document.getElementById("number");
+const savedValue = JSON.parse(localStorage.getItem("number"));
 number.value = 0;
+
+if (savedValue != undefined) {
+	number.value = savedValue;
+}
 
 number.addEventListener("input", () => {
 	if (number.value < 0) {
 		number.value = 0;
 	}
+
+	localStorage.setItem("number", JSON.stringify(number.value));
 });
 
 const input = document.querySelector("#input");
@@ -67,7 +74,7 @@ function joinTextWithoutBadLines(lines) {
 			)
 		) {
 			text += lines[i];
-			if (lines[i].includes("*")) {
+			if (lines[i].includes("*") && lines[i].length < 4) {
 				game_count++;
 			}
 			if (max_games != 0 && max_games == game_count) {
