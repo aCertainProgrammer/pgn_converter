@@ -6,11 +6,23 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: white;
+	color: #cccccc;
+	gap: 20px;
+
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 input {
 	border: 1px solid #aaaaaa;
 	padding: 20px;
 	border-radius: 10px;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex > input {
+	padding: 10px;
 }

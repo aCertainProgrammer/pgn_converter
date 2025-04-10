@@ -1,3 +1,12 @@
+const number = document.getElementById("number");
+number.value = 0;
+
+number.addEventListener("input", () => {
+	if (number.value < 0) {
+		number.value = 0;
+	}
+});
+
 const input = document.querySelector("#input");
 
 input.addEventListener("input", async () => {
@@ -48,6 +57,8 @@ function makeTextIntoLines(text) {
 
 function joinTextWithoutBadLines(lines) {
 	let text = "";
+	let max_games = number.value;
+	let game_count = 0;
 	for (let i = 0; i < lines.length; i++) {
 		if (
 			!(
@@ -56,6 +67,12 @@ function joinTextWithoutBadLines(lines) {
 			)
 		) {
 			text += lines[i];
+			if (lines[i].includes("*")) {
+				game_count++;
+			}
+			if (max_games != 0 && max_games == game_count) {
+				break;
+			}
 		}
 	}
 
